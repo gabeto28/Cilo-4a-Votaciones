@@ -11,37 +11,6 @@ cors = CORS(app)
 from Controladores.ControladorCandidatos import ControladorCandidatos
 from Controladores.ControladorMesas import ControladorMesas
 from Controladores.ControladorPartidos import ControladorPartidos
-
-miCrontroladorCandidatos = ControladorCandidatos()
-miCrontroladorMesas = ControladorMesas()
-miCrontroladorPartidos = ControladorPartidos()
-###################################################################################
-@app.route("/", methods=['GET'])
-def test():
-    json = {}
-    json["message"] = "Server running ..."
-    return jsonify(json)
-
-
-###################################################################################
-
-@app.route("/candidatos", methods=['GET'])
-def getCandidatos():
-    json = miCrontroladorCandidatos.index()
-    return jsonify(json)
-from flask import Flask
-from flask import jsonify
-from flask import request
-from flask_cors import CORS
-import json
-from waitress import serve
-
-app = Flask(__name__)
-cors = CORS(app)
-
-from Controladores.ControladorCandidatos import ControladorCandidatos
-from Controladores.ControladorMesas import ControladorMesas
-from Controladores.ControladorPartidos import ControladorPartidos
 from Controladores.ControladorResultados import ControladorResultados
 
 miCrontroladorCandidatos = ControladorCandidatos()

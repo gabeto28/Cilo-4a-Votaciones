@@ -21,6 +21,7 @@ class ControladorMesas():
         MesaActual = Mesas(self.repositorioMesas.findById(id))
         MesaActual.localizacion = infoMesas["localizacion"]
         MesaActual.estado = infoMesas["estado"]
+        MesaActual.cedulasIns = infoMesas["cedulasIns"]
         return self.repositorioMesas.save(MesaActual)
 
     def delete(self, id):
