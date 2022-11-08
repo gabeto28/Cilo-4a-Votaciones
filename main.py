@@ -8,6 +8,13 @@ from waitress import serve
 app = Flask(__name__)
 cors = CORS(app)
 
+from Controladores.ControladorCandidatos import ControladorCandidatos
+from Controladores.ControladorMesas import ControladorMesas
+from Controladores.ControladorPartidos import ControladorPartidos
+
+miCrontroladorCandidatos = ControladorCandidatos()
+miCrontroladorMesas = ControladorMesas()
+miCrontroladorPartidos = ControladorPartidos()
 ###################################################################################
 @app.route("/", methods=['GET'])
 def test():
@@ -17,7 +24,7 @@ def test():
 
 
 ###################################################################################
-#################################CANDIDATOS########################################
+
 @app.route("/candidatos", methods=['GET'])
 def getCandidatos():
     json = miCrontroladorCandidatos.index()
@@ -25,15 +32,10 @@ def getCandidatos():
 
 
 @app.route("/candidatos", methods=['POST'])
+
 def crearCandidatos():
     data = request.get_json()
     json = miCrontroladorCandidatos.create(data)
-    return jsonify(json)
-
-
-@app.route("/candidatos/<string:id>", methods=['GET'])
-def getCandidatos(id):
-    json = miCrontroladorCandidatos.show(id)
     return jsonify(json)
 
 
@@ -50,37 +52,30 @@ def eliminarCandidatos(id):
     return jsonify(json)
 
 ###################################################################################
-#################################PARTIDOS########################################
-@app.route("/partidos", methods=['GET'])
-def getPartidos():
-    json = miCrontroladorPartidos.index()
+@app.route("/mesas", methods=['GET'])
+def getMesas():
+    json = miCrontroladorMesas.index()
     return jsonify(json)
 
 
-@app.route("/partidos", methods=['POST'])
-def crearPartido():
+@app.route("/mesas", methods=['POST'])
+def crearMesas():
     data = request.get_json()
-    json = miCrontroladorPartidos.create(data)
+    json = miCrontroladorMesas.create(data)
     return jsonify(json)
 
-
-@app.route("/partidos/<string:id>", methods=['GET'])
-def getPartidos(id):
-    json = miCrontroladorPartidos.show(id)
-    return jsonify(json)
-
-
-@app.route("/partidos/<string:id>", methods=['PUT'])
-def modificarPartidos(id):
+@app.route("/mesas/<string:id>", methods=['PUT'])
+def modificarMesas(id):
     data = request.get_json()
-    json = miCrontroladorPartidos.update(id, data)
+    json = miCrontroladorMesas.update(id, data)
     return jsonify(json)
 
 
-@app.route("/partidos/<string:id>", methods=['DELETE'])
-def eliminarPartidos(id):
-    json = miCrontroladorPartidos.delete(id)
+@app.route("/mesas/<string:id>", methods=['DELETE'])
+def eliminarMesas(id):
+    json = miCrontroladorMesas.delete(id)
     return jsonify(json)
+
 
 ###################################################################################
 
